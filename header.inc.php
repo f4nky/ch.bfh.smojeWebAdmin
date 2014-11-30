@@ -10,6 +10,7 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css">
 	</head>
@@ -19,7 +20,18 @@
 			<nav class="navbar navbar-default" role="navigation">
 				<div class="wrapper">
 					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
 						<a href="#"><div class="logo"></div></a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul id="navbar" class="nav navbar-nav">
+							<li class="active"><a title="Home" href="index.php">Home</a></li>
+							<li><a title="New" href="new.php">Neue Smoje</a></li>
+						</ul>
 					</div>
 				</div>
 			</nav>
