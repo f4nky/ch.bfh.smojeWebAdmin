@@ -9,7 +9,8 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="tab-content">
-						<form id="formNew">
+						<div id="success"></div>
+						<form id="formNew" method="post" action="libs/processSmojeRegistration.php">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
 									<a href="#general" data-toggle="collapse" data-target="#general">Allgemein</a>
@@ -34,26 +35,26 @@
 											<div class="col-sm-4">
 												<div class="form-group">
 													<label class="control-label">URL NetModule*</label>
-													<input type="text" class="form-control" id="urlnetmodule" name="url_netmodule">
+													<input type="url" class="form-control" id="url_netmodule" name="url_netmodule">
 												</div>
 											</div>
 											<div class="col-sm-4">
 												<div class="form-group">
 													<label class="control-label">URL Sensoren*</label>
-													<input type="text" class="form-control" id="urlsensoren" name="url_sensoren">
+													<input type="url" class="form-control" id="url_sensor" name="url_sensor">
 												</div>
 											</div>											
 											<div class="col-sm-4">
 												<div class="form-group">
 													<label class="control-label">URL Tissan*</label>
-													<input type="text" class="form-control" id="urltissan" name="url_tissan">
+													<input type="url" class="form-control" id="url_tissan" name="url_tissan">
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-default" name="btnSave">Speichern</button>
+							<button type="submit" class="btn btn-default" id="btnSave" name="btnSave">Speichern</button>
 						</form>
 					</div>
 				</div>

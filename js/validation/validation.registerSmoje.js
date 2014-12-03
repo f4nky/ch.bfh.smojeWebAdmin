@@ -23,11 +23,16 @@ $('#formNew').validate({
 	},
 	errorClass: 'help-block',
 	submitHandler: function(form) {
-		$.ajaxSubmit({
-			type: 'POST',
-			url: 'libs/processSmojeRegistration.php',
-			data: $(form).serialize()
-			//dataType: 'json'
+		$.ajax({
+			type: $(form).attr('method'),
+			url: $(form).attr('action'),
+			data: $(form).serialize(),
+			success: function(result) {
+				$('#success').html('<div class="alert alert-success"><strong>Smoje wurde gespeichert!</strong></div>').delay(3000).fadeOut('fast');
+				$('#formNew').trigger('reset');
+				$('#formNew').fadeOut('fast').delay(3000).fadeIn('fast');
+				$('#formNew').find('.has-success').removeClass('has-success');
+			}
 		});
 		return false;
 	}
