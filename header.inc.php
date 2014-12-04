@@ -1,3 +1,10 @@
+<?php
+if (isset($_GET['page'])) {
+	$page = $_GET['page'];
+} else {
+	$page = 'home';
+}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,8 +36,8 @@
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul id="navbar" class="nav navbar-nav">
-							<li class="active"><a title="Home" href="index.php">Home</a></li>
-							<li><a title="New" href="new.php">Neue Smoje</a></li>
+							<li class="<?= ($page == 'home') ? 'active' : ''; ?>"><a title="Home" href="index.php?page=home">Home</a></li>
+							<li class="<?= ($page == 'new') ? 'active' : ''; ?>"><a title="New" href="index.php?page=new">Neue Smoje</a></li>
 						</ul>
 					</div>
 				</div>
