@@ -10,7 +10,7 @@
 				<div class="col-xs-12">
 					<div class="tab-content">
 						<div id="success"></div>
-						<form id="formNew" method="post" action="libs/processSmojeRegistration.php">
+						<form id="formNew" method="post" action="libs/processRegisterSmoje.php">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
 									<a href="#general" data-toggle="collapse" data-target="#general">Allgemein</a>

@@ -1,15 +1,9 @@
 <?php
-include_once('class/Database.php');
-$db = Database::getInstance();
 
-$queryStations = 'SELECT * FROM station ORDER BY id';
-$resultStations = $db->query($queryStations);
-while($row = $resultStations->fetch_assoc()) {
-	$stations[] = $row;
-}
+$json = file_get_contents('http://178.62.163.199/smoje/index.php/measurements');
+$jobj = json_decode($json);
+$stations = $jobj->stations;
 
-$querySensors = 'SELECT * FROM sensor ORDER BY station_id, stype_id';
-$resultSensors = $db->query($querySensors);
 ?>
 
 <?php include_once('header.inc.php'); ?>
@@ -24,7 +18,7 @@ $resultSensors = $db->query($querySensors);
 				<div class="col-xs-12">
 					<ul class="nav nav-pills">
 						<?php foreach($stations as $idx => $station) { ?>
-							<li role="presentation" <?= ($idx == 0) ? 'class="active"' : ''; ?>><a href="#<?= $station['name']; ?>" data-toggle="tab"><?= $station['name']; ?></a></li>
+							<li role="presentation" <?= ($idx == 0) ? 'class="active"' : ''; ?>><a href="#<?= $station->name; ?>" data-toggle="tab"><?= $station->name; ?></a></li>
 						<?php } ?>
 					</ul>
 				</div>
@@ -33,7 +27,7 @@ $resultSensors = $db->query($querySensors);
 				<div class="col-xs-12">
 					<div class="tab-content">
 						<?php foreach($stations as $idx => $station) { ?>
-						<div class="tab-pane<?= ($idx == 0) ? ' active' : ''; ?>" id="<?= $station['name']; ?>">
+						<div class="tab-pane<?= ($idx == 0) ? ' active' : ''; ?>" id="<?= $station->name; ?>">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
 									<a href="#general<?= $idx; ?>" data-toggle="collapse" data-target="#general<?= $idx; ?>">Allgemein</a>
@@ -44,13 +38,13 @@ $resultSensors = $db->query($querySensors);
 											<div class="col-sm-4">
 												<div class="form-group">
 													<label class="control-label">Name</label>
-													<input type="text" class="form-control" name="name" value="<?= $station['name']; ?>">
+													<input type="text" class="form-control" name="name" value="<?= $station->name; ?>">
 												</div>
 											</div>
 											<div class="col-sm-8">
 												<div class="form-group">
 													<label class="control-label">Beschreibung</label>
-													<input type="text" class="form-control" name="desc" value="<?= $station['description']; ?>">
+													<input type="text" class="form-control" name="desc" value="<?= $station->description; ?>">
 												</div>
 											</div>
 										</div>
@@ -58,19 +52,19 @@ $resultSensors = $db->query($querySensors);
 											<div class="col-sm-4">
 												<div class="form-group">
 													<label class="control-label">URL NetModule</label>
-													<input type="text" class="form-control" name="url_netmodule" value="<?= $station['url_netmodule']; ?>">
+													<input type="text" class="form-control" name="url_netmodule" value="<?//= $station->urlNetmodule; ?>">
 												</div>
 											</div>
 											<div class="col-sm-4">
 												<div class="form-group">
 													<label class="control-label">URL Sensoren</label>
-													<input type="text" class="form-control" name="url_sensoren" value="<?= $station['url_sensor']; ?>">
+													<input type="text" class="form-control" name="url_sensoren" value="<?= $station->urlSensor; ?>">
 												</div>
 											</div>
 											<div class="col-sm-4">
 												<div class="form-group">
 													<label class="control-label">URL Tissan</label>
-													<input type="text" class="form-control" name="url_tissan" value="<?= $station['url_tissan']; ?>">
+													<input type="text" class="form-control" name="url_tissan" value="<?//= $station->urlTissan; ?>">
 												</div>
 											</div>
 										</div>
@@ -102,22 +96,13 @@ $resultSensors = $db->query($querySensors);
 												</tr>
 											</thead>
 											<tbody>
-
+												<?php foreach($station->sensors as $idx => $sensor) { ?>
 												<tr>
-													<td>1</td>
-													<td>Wassertemperatur</td>
+													<td><?= $idx; ?></td>
+													<td><?= $sensor->name; ?></td>
 													<td><input type="text" name="sensor1"></td>
 												</tr>
-												<tr>
-													<td>2</td>
-													<td>Lufttemperatur</td>
-													<td><input type="text" name="sensor2"></td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>Windgeschwindigkeit</td>
-													<td><input type="text" name="sensor3"></td>
-												</tr>
+												<?php } ?>
 											</tbody>
 										</table>
 									</div>
@@ -125,10 +110,18 @@ $resultSensors = $db->query($querySensors);
 							</div>
 						</div>
 						<?php } ?>
-						<button type="submit" class="btn btn-default">Speichern</button>
+						<button type="submit" class="btn btn-default" id="btnSave" name="btnSave">Speichern</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
-<?php include_once('footer.inc.php'); ?>
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/jquery.validate.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/functions.js"></script>
+		<script src="js/validation/validation.updateSmoje.js"></script>
+	</body>
+</html>
+
+<?php //include_once('footer.inc.php'); ?>
