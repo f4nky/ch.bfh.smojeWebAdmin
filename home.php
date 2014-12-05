@@ -35,7 +35,13 @@ $stations = $jobj->stations;
 								<div id="general<?= $idx; ?>" class="panel-collapse collapse in">
 									<div class="panel-body">
 										<div class="row">
-											<div class="col-sm-4">
+											<div class="col-sm-2">
+												<div class="form-group">
+													<label class="control-label">ID</label>
+													<input type="text" class="form-control" name="name" value="<?= $station->stationId; ?>" disabled>
+												</div>
+											</div>
+											<div class="col-sm-2">
 												<div class="form-group">
 													<label class="control-label">Name</label>
 													<input type="text" class="form-control" name="name" value="<?= $station->name; ?>">

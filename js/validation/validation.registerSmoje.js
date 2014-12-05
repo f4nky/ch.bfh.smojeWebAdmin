@@ -1,5 +1,9 @@
 $('#formNew').validate({
 	rules:{
+		id: {
+			required: true,
+			number: true
+		},
 		name: 'required',
 		url_netmodule: {
 			required: true,

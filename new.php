@@ -18,10 +18,16 @@
 								<div id="general" class="panel-collapse collapse in">
 									<div class="panel-body">
 										<div class="row">
-											<div class="col-sm-4">
+											<div class="col-xs-2">
+												<div class="form-group">
+													<label class="control-label">ID*</label>
+													<input type="text" class="form-control" id="id" name="id" autofocus>
+												</div>
+											</div>
+											<div class="col-xs-2">
 												<div class="form-group">
 													<label class="control-label">Name*</label>
-													<input type="text" class="form-control" id="name" name="name" autofocus>
+													<input type="text" class="form-control" id="name" name="name"1>
 												</div>
 											</div>
 											<div class="col-sm-8">
