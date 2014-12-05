@@ -1,8 +1,8 @@
 <?php
 
 $json = file_get_contents('http://178.62.163.199/smoje/index.php/measurements');
-$jobj = json_decode($json);
-$stations = $jobj->stations;
+$jsonObj = json_decode($json);
+$stations = $jsonObj->stations;
 
 ?>
 
@@ -96,17 +96,19 @@ $stations = $jobj->stations;
 												<tr>
 													<th>#</th>
 													<th>Typ</th>
-													<th>Frequenz Datenabfrage in Minuten</th>
+													<th>Name</th>
+													<th>Frequenz Datenabfrage in Sekunden</th>
 													<th>Status</th>
-													<th>Aktion</th>
 												</tr>
 											</thead>
 											<tbody>
 												<?php foreach($station->sensors as $idx => $sensor) { ?>
 												<tr>
 													<td><?= $idx; ?></td>
+													<td><?= $sensor->sensorType; ?></td>
 													<td><?= $sensor->name; ?></td>
-													<td><input type="text" name="sensor1"></td>
+													<td><input type="text" name="sensor<?= $idx; ?>"></td>
+													<td><?= $sensor->status; ?></td>
 												</tr>
 												<?php } ?>
 											</tbody>
