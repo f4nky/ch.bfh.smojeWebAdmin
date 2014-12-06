@@ -1,12 +1,12 @@
 <?php
 
-$json = file_get_contents('http://178.62.163.199/smoje/index.php/measurements');
+include_once('header.inc.php');
+
+$json = file_get_contents($config['json_measurements']);
 $jsonObj = json_decode($json);
 $stations = $jsonObj->stations;
 
 ?>
-
-<?php include_once('header.inc.php'); ?>
 
 		<div class="container">
 			<div class="row">
@@ -35,13 +35,13 @@ $stations = $jsonObj->stations;
 								<div id="general<?= $idx; ?>" class="panel-collapse collapse in">
 									<div class="panel-body">
 										<div class="row">
-											<div class="col-sm-2">
+											<div class="col-sm-1">
 												<div class="form-group">
 													<label class="control-label">ID</label>
-													<input type="text" class="form-control" name="name" value="<?= $station->stationId; ?>" disabled>
+													<p class="form-control-static"><?= $station->stationId; ?></p>
 												</div>
 											</div>
-											<div class="col-sm-2">
+											<div class="col-sm-3">
 												<div class="form-group">
 													<label class="control-label">Name</label>
 													<input type="text" class="form-control" name="name" value="<?= $station->name; ?>">
@@ -57,20 +57,20 @@ $stations = $jsonObj->stations;
 										<div class="row">
 											<div class="col-sm-4">
 												<div class="form-group">
-													<label class="control-label">URL NetModule</label>
-													<input type="text" class="form-control" name="url_netmodule" value="<?//= $station->urlNetmodule; ?>">
+													<label class="control-label">Basis-URL NetModule</label>
+													<input type="text" class="form-control" name="url_netmodule" value="<?= $station->urlNetmodule; ?>">
 												</div>
 											</div>
 											<div class="col-sm-4">
 												<div class="form-group">
-													<label class="control-label">URL Sensoren</label>
+													<label class="control-label">Basis-URL Sensoren</label>
 													<input type="text" class="form-control" name="url_sensoren" value="<?= $station->urlSensor; ?>">
 												</div>
 											</div>
 											<div class="col-sm-4">
 												<div class="form-group">
-													<label class="control-label">URL Tissan</label>
-													<input type="text" class="form-control" name="url_tissan" value="<?//= $station->urlTissan; ?>">
+													<label class="control-label">Basis-URL Tissan</label>
+													<input type="text" class="form-control" name="url_tissan" value="<?= $station->urlTissan; ?>">
 												</div>
 											</div>
 										</div>
@@ -87,32 +87,91 @@ $stations = $jsonObj->stations;
 							</div>
 							<div class="panel panel-primary">
 								<div class="panel-heading">
+									<a href="#position<?= $idx; ?>" data-toggle="collapse" data-target="#position<?= $idx; ?>">Position (via Tissan-Tracker)</a>
+								</div>
+								<div id="position<?= $idx; ?>" class="panel-collapse collapse in">
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-sm-2">
+												<div class="form-group">
+													<label class="control-label">Latitude</label>
+													<p class="form-control-static">47.14227</p>
+												</div>
+											</div>
+											<div class="col-sm-2">
+												<div class="form-group">
+													<label class="control-label">Longitude</label>
+													<p class="form-control-static">7.24343</p>
+												</div>
+											</div>
+											<div class="col-sm-1">
+												<div class="form-group">
+													<label class="control-label">Höhe</label>
+													<p class="form-control-static">481</p>
+												</div>
+											</div>
+											<div class="col-sm-1">
+												<div class="form-group">
+													<label class="control-label">Status</label>
+													<p class="form-control-static">Aktiv</p>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label class="control-label">Letztes Update</label>
+													<p class="form-control-static">2014-12-05T13:58:23.482Z</p>
+												</div>
+											</div>
+											<div class="col-sm-2">
+												<div class="form-group">
+													<label class="control-label">Karte</label>
+													<p class="form-control-static"><a href="http://tracker.xrj.ch/smoje-api/v1/1001">Google Maps</a></p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-primary">
+								<div class="panel-heading">
 									<a href="#sensors" data-toggle="collapse" data-target="#sensors">Sensoren</a>
 								</div>
 								<div id="sensors" class="panel-collapse collapse in">
 									<div class="panel-body">
-										<table class="table">
-											<thead>
-												<tr>
-													<th>#</th>
-													<th>Typ</th>
-													<th>Name</th>
-													<th>Frequenz Datenabfrage in Sekunden</th>
-													<th>Status</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php foreach($station->sensors as $idx => $sensor) { ?>
-												<tr>
-													<td><?= $idx; ?></td>
-													<td><?= $sensor->sensorType; ?></td>
-													<td><?= $sensor->name; ?></td>
-													<td><input type="text" name="sensor<?= $idx; ?>"></td>
-													<td><?= $sensor->status; ?></td>
-												</tr>
-												<?php } ?>
-											</tbody>
-										</table>
+										<div class="table-responsive">
+											<table class="table">
+												<thead>
+													<tr>
+														<th class="col-xs-1">#</th>
+														<th class="col-xs-2">Typ</th>
+														<th class="col-xs-2">Name</th>
+														<th class="col-xs-1">Status</th>
+														<th class="col-xs-2">Update in min</th>
+														<th class="col-xs-4">Letzte Messung(en)</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php foreach($station->sensors as $idx => $sensor) { ?>
+													<tr>
+														<td><?= $sensor->sensorId; ?></td>
+														<td><?= $sensor->sensorType; ?></td>
+														<td><?= $sensor->name; ?></td>
+														<td class="<?= ($sensor->status == 'OK') ? 'text-success' : 'text-danger'; ?>"><?= $sensor->status; ?></td>
+														<td>
+															<div class="form-group">
+																<input type="text" class="form-control" name="delay" value="<?= $sensor->delay; ?>">
+															</div>
+														</td>
+														<td>
+															<?php foreach($sensor->measurements as $idx => $measurement) { ?>
+																<p><?= $measurement->name .': '. (($sensor->sensorId == 10) ? '\''. $measurement->valueString . '\'' : $measurement->valueFloat) .' '. $measurement->unit .' <span class="small pull-right">'. $measurement->timestamp .'</span>'; ?></p>
+															<?php } ?>
+														</td>
+													</tr>
+													<?php } ?>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
