@@ -6,6 +6,12 @@ $json = file_get_contents($config['json_measurements']);
 $jsonObj = json_decode($json);
 $stations = $jsonObj->stations;
 
+function getGPSData($url) {
+	$json = file_get_contents($url);
+	$gpsData = json_decode($json);
+	return $gpsData;
+} 
+
 ?>
 
 		<div class="container">
@@ -26,7 +32,9 @@ $stations = $jsonObj->stations;
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="tab-content">
-						<?php foreach($stations as $idx => $station) { ?>
+						<?php foreach($stations as $idx => $station) {
+								$gpsData = getGPSData($station->urlTissan);
+						?>
 						<div class="tab-pane<?= ($idx == 0) ? ' active' : ''; ?>" id="<?= $station->name; ?>">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
@@ -75,6 +83,12 @@ $stations = $jsonObj->stations;
 											</div>
 										</div>
 										<div class="row">
+											<div class="col-xs-6 col-sm-8">
+												<div class="form-group">
+													<label class="control-label">Externe Spannung</label>
+													<p class="form-control-static"><?= $gpsData->lastExternVoltage; ?> V</p>
+												</div>
+											</div>
 											<div class="col-xs-6 col-sm-4">
 												<div class="form-group">
 													<label class="control-label">Aktionen</label>
@@ -95,31 +109,31 @@ $stations = $jsonObj->stations;
 											<div class="col-sm-2">
 												<div class="form-group">
 													<label class="control-label">Latitude</label>
-													<p class="form-control-static">47.14227</p>
+													<p class="form-control-static"><?= $gpsData->lastPosition->latitude; ?></p>
 												</div>
 											</div>
 											<div class="col-sm-2">
 												<div class="form-group">
 													<label class="control-label">Longitude</label>
-													<p class="form-control-static">7.24343</p>
+													<p class="form-control-static"><?= $gpsData->lastPosition->longitude; ?></p>
 												</div>
 											</div>
 											<div class="col-sm-1">
 												<div class="form-group">
 													<label class="control-label">Höhe</label>
-													<p class="form-control-static">481</p>
+													<p class="form-control-static"><?= $gpsData->lastPosition->altitude; ?></p>
 												</div>
 											</div>
 											<div class="col-sm-1">
 												<div class="form-group">
 													<label class="control-label">Status</label>
-													<p class="form-control-static">Aktiv</p>
+													<p class="form-control-static <?= ($gpsData->status == 'a') ? 'text-success' : 'text-danger'; ?>"><?= ($gpsData->status == 'a') ? 'Aktiv' : 'Inaktiv'; ?></p>
 												</div>
 											</div>
 											<div class="col-sm-4">
 												<div class="form-group">
 													<label class="control-label">Letztes Update</label>
-													<p class="form-control-static">2014-12-05T13:58:23.482Z</p>
+													<p class="form-control-static"><?= $gpsData->lastPosition->gpstime; ?></p>
 												</div>
 											</div>
 											<div class="col-sm-2">
@@ -164,7 +178,7 @@ $stations = $jsonObj->stations;
 														</td>
 														<td>
 															<?php foreach($sensor->measurements as $idx => $measurement) { ?>
-																<p><?= $measurement->name .': '. (($sensor->sensorId == 10) ? '\''. $measurement->valueString . '\'' : $measurement->valueFloat) .' '. $measurement->unit .' <span class="small pull-right">'. $measurement->timestamp .'</span>'; ?></p>
+																<p><?= $measurement->name .': '. (($sensor->sensorId == 10) ? ' [Bild]' : $measurement->valueFloat .' '. $measurement->unit) .' <span class="small pull-right">'. $measurement->timestamp .'</span>'; ?></p>
 															<?php } ?>
 														</td>
 													</tr>
