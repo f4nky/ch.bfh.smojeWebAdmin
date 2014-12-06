@@ -1,4 +1,6 @@
 <?php
+$config = parse_ini_file('config.ini');
+
 if (isset($_GET['page'])) {
 	$page = $_GET['page'];
 } else {
