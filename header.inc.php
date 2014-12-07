@@ -1,5 +1,5 @@
 <?php
-$config = parse_ini_file('config.ini');
+require_once('config.php');
 
 if (isset($_GET['page'])) {
 	$page = $_GET['page'];

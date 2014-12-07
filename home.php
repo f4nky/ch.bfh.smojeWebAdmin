@@ -1,8 +1,8 @@
 <?php
 
-include_once('header.inc.php');
+require_once('header.inc.php');
 
-$json = file_get_contents($config['json_measurements']);
+$json = file_get_contents(PATH_JSON_MEASUREMENTS);
 $jsonObj = json_decode($json);
 $stations = $jsonObj->stations;
 
@@ -45,13 +45,13 @@ function getGPSData($url) {
 									<div id="general<?= $idx; ?>" class="panel-collapse collapse in">
 										<div class="panel-body">
 											<div class="row">
-												<div class="col-xs-2 col-sm-1">
+												<div class="col-xs-2 col-sm-2">
 													<div class="form-group">
 														<label class="control-label">ID</label>
 														<input type="text" class="form-control" name="id" value="<?= $station->stationId; ?>" readonly>
 													</div>
 												</div>
-												<div class="col-xs-10 col-sm-3">
+												<div class="col-xs-10 col-sm-2">
 													<div class="form-group">
 														<label class="control-label">Name</label>
 														<input type="text" class="form-control" name="name" value="<?= $station->name; ?>">
@@ -200,4 +200,4 @@ function getGPSData($url) {
 			</div>
 		</div>
 
-<?php include_once('footer.inc.php'); ?>
+<?php require_once('footer.inc.php'); ?>

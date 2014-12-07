@@ -1,9 +1,5 @@
 <?php
-
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PWD', '');
-define('DB_NAME', 'smojedb');
+require_once('../config.php');
 
 class Database extends mysqli {
 	private static $instance = null;

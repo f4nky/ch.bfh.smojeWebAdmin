@@ -1,4 +1,4 @@
-<?php include_once('header.inc.php'); ?>
+<?php require_once('header.inc.php'); ?>
 
 		<div class="container">
 			<div class="row">
@@ -67,4 +67,4 @@
 			</div>
 		</div>
 
-<?php include_once('footer.inc.php'); ?>
+<?php require_once('footer.inc.php'); ?>
