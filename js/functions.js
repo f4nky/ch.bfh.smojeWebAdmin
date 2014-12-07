@@ -14,6 +14,7 @@ function fadeContainer() {
 function customSettingsValidation() {
 	$.extend($.validator.messages, {
 		required: 'Bitte Feld ausfüllen.',
-		url: 'Bitte gültige URL eingeben.'
+		url: 'Bitte gültige URL eingeben.',
+		digits: 'Nur Zahlen erlaubt.'
 	});
 }

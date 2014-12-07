@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST['btnSave'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	include_once('../class/Database.php');
 
 	$db = Database::getInstance();
