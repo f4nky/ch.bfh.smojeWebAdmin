@@ -85,16 +85,16 @@ function getGPSData($url) {
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-xs-6 col-sm-8">
+												<div class="col-sm-8">
 													<div class="form-group">
 														<label class="control-label">Externe Spannung</label>
 														<p class="form-control-static"><?= $gpsData->lastExternVoltage; ?> V</p>
 													</div>
 												</div>
-												<div class="col-xs-6 col-sm-4">
+												<div class="col-sm-4">
 													<div class="form-group">
 														<label class="control-label">Aktionen</label>
-														<button type="button" class="form-control" name="btnRestart" class="btn btn-default">Restart NetModule</button>
+														<button type="button" name="btnRestart" class="btn btn-default form-control">Restart NetModule</button>
 													</div>
 												</div>
 											</div>
