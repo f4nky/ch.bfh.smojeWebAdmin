@@ -94,7 +94,7 @@ function getGPSData($url) {
 												<div class="col-sm-4">
 													<div class="form-group">
 														<label class="control-label">Aktionen</label>
-														<button type="button" name="btnRestart" class="btn btn-default form-control">Restart NetModule</button>
+														<button type="button" class="btn btn-default form-control" name="btnRestart" data-toggle="modal" data-target="#modalRestartConf">Restart NetModule</button>
 													</div>
 												</div>
 											</div>
@@ -200,6 +200,25 @@ function getGPSData($url) {
 							<button type="submit" class="btn btn-default" id="btnSave" name="btnSave">Speichern</button>
 						</div>
 					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- modal confirmation dialog for restarting -->
+		<div class="modal fade" id="modalRestartConf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title" id="myModalLabel">Bestätigung</h4>
+					</div>
+					<div class="modal-body">
+						<p>Station restarten?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+						<button type="button" class="btn btn-primary" id="btnRestartConf" name="btnRestartConf">Restart NetModule</button>
+					</div>
 				</div>
 			</div>
 		</div>

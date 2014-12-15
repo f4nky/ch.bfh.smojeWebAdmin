@@ -22,10 +22,12 @@ function customSettingsValidation() {
 
 /* === Restart functionality === */
 function restartStation() {
-	$('button[name=btnRestart]').click(function() {
-		$.ajax({
+	$('button[name=btnRestartConf]').click(function() {
+		alert('hello world!');
+		$('#modalRestartConf').modal('hide');
+		/*$.ajax({
 			type: 'GET',
 			url: $('input[name=url_netmodule]').val() + 'relay/cycle',
-		});
+		});*/
 	});
 }
