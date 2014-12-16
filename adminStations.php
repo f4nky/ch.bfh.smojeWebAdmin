@@ -2,7 +2,7 @@
 
 require_once('header.inc.php');
 
-$json = file_get_contents(PATH_JSON_MEASUREMENTS);
+$json = file_get_contents(URL_STATION_CUR_MEASUREMENTS);
 $jsonObj = json_decode($json);
 $stations = $jsonObj->station;
 
@@ -167,7 +167,7 @@ function getGPSData($url) {
 														</tr>
 													</thead>
 													<tbody>
-														<?php foreach($station->sensors->sensors as $idx => $sensor) { ?>
+														<?php foreach($station->sensors as $idx => $sensor) { ?>
 														<tr>
 															<td><?= $sensor->sensorId; ?></td>
 															<td><?= $sensor->name; ?></td>
@@ -183,9 +183,9 @@ function getGPSData($url) {
 																</div>
 															</td>
 															<td>
-																<?php //foreach($sensor->measurements as $idx => $measurement) { ?>
-																	<p><?//= $measurement->name .': '. (($sensor->sensorId == 10) ? ' [Bild]' : $measurement->valueFloat .' '. $measurement->unit) .' <span class="small pull-right">'. $measurement->timestamp .'</span>'; ?></p>
-																<?php //} ?>
+																<?php foreach($sensor->measurements as $idx => $measurement) { ?>
+																	<p>Wert: <?= (($sensor->sensorId == 1) ? ' [Bild]' : $measurement->value .' '. $sensor->unit) .' <span class="small pull-right">'. $measurement->timestamp->date .'</span>'; ?></p>
+																<?php } ?>
 															</td>
 														</tr>
 														<?php } ?>
