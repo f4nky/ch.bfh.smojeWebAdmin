@@ -1,9 +1,18 @@
-<?php require_once('header.inc.php'); ?>
+<?php 
+
+require_once('header.inc.php');
+
+$json = file_get_contents(URL_SENSORS);
+$jsonObj = json_decode($json);
+$sensors = $jsonObj->sensors;
+
+?>
 
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12">
 					<h1>Sensoren administrieren</h1>
+					<p>Diese Angaben gelten für sämtliche Stationen.</p>
 				</div>
 			</div>
 			<div class="row">
@@ -30,28 +39,28 @@
 												</tr>
 											</thead>
 											<tbody>
-												<?php //foreach($station->sensors as $idx => $sensor) { ?>
+												<?php foreach($sensors as $idx => $sensor) { ?>
 												<tr>
-													<td>3<?//= $sensor->sensorId; ?></td>
-													<td>air_temperature<?//= $sensor->name"; ?></td>
+													<td><?= $sensor->sensorId; ?></td>
+													<td><?= $sensor->name; ?></td>
 													<td>
 														<div class="form-group">
-															<input type="text" class="form-control title" name="title[<?//= $sensor->sensorId; ?>]" value="Lufttemperatur<?//= $sensor->title; ?>">
+															<input type="text" class="form-control title" name="title[<?= $sensor->sensorId; ?>]" value="<?= $sensor->title; ?>">
 														</div>
 													</td>
 													<td>
 														<div class="form-group">
-															<input type="text" class="form-control description" name="description[<?//= $sensor->sensorId; ?>]" value="Lorem ipsum<?//= $sensor->description; ?>">
+															<input type="text" class="form-control description" name="description[<?= $sensor->sensorId; ?>]" value="<?= $sensor->description; ?>">
 														</div>
 													</td>
 													<td>
 														<div class="form-group">
-															<input type="text" class="form-control" name="unit[<?//= $sensor->sensorId; ?>]" value="°C<?//= $sensor->unit; ?>">
+															<input type="text" class="form-control" name="unit[<?= $sensor->sensorId; ?>]" value="<?= $sensor->unit; ?>">
 														</div>
 													</td>
 													<td>
 														<div class="form-group">
-															<select class="form-control" name="displayType[<?//= $sensor->sensorId; ?>]">
+															<select class="form-control" name="displayType[<?= $sensor->sensorId; ?>]">
 																<option value="1" selected>infoWindow</option>
 																<option value="2">only details</option>
 																<option value="3">none</option>
@@ -60,12 +69,12 @@
 													</td>
 													<td>
 														<div class="form-group">
-															<input type="text" class="form-control" name="sortOrder[<?//= $sensor->sensorId; ?>]" value="30<?//= $sensor->sortOrder; ?>">
+															<input type="text" class="form-control" name="sortOrder[<?= $sensor->sensorId; ?>]" value="<?= $sensor->sortOrder; ?>">
 														</div>
 													</td>
 												</tr>
-												<?php //} ?>
-												<tr>
+												<?php } ?>
+												<!--<tr>
 													<td>4<?//= $sensor->sensorId; ?></td>
 													<td>air_athmosphericpressure<?//= $sensor->name"; ?></td>
 													<td>
@@ -97,7 +106,7 @@
 															<input type="text" class="form-control" name="sortOrder[<?//= $sensor->sensorId; ?>]" value="40<?//= $sensor->sortOrder; ?>">
 														</div>
 													</td>
-												</tr>
+												</tr>-->
 											</tbody>
 										</table>
 									</div>
