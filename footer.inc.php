@@ -3,7 +3,8 @@
 		<script src="js/jquery.validate.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/functions.js"></script>
-		<?= ($page == 'home') ? '<script src="js/validation/validation.updateSmoje.js"></script>' : ''; ?>
-		<?= ($page == 'new') ? '<script src="js/validation/validation.registerSmoje.js"></script>' : ''; ?>
+		<?= ($page == 'adminStations') ? '<script src="js/validation/validation.updateStation.js"></script>' : ''; ?>
+		<?= ($page == 'adminSensors') ? '<script src="js/validation/validation.updateSensor.js"></script>' : ''; ?>
+		<?//= ($page == 'new') ? '<script src="js/validation/validation.registerStation.js"></script>' : ''; ?>
 	</body>
 </html>

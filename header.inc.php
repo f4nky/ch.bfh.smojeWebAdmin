@@ -4,7 +4,7 @@ require_once('config.php');
 if (isset($_GET['page'])) {
 	$page = $_GET['page'];
 } else {
-	$page = 'home';
+	$page = 'adminStations';
 }
 ?>
 <!DOCTYPE html>
@@ -38,8 +38,8 @@ if (isset($_GET['page'])) {
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul id="navbar" class="nav navbar-nav">
-							<li class="<?= ($page == 'home') ? 'active' : ''; ?>"><a title="Home" href="index.php?page=home">Home</a></li>
-							<li class="<?= ($page == 'new') ? 'active' : ''; ?>"><a title="New" href="index.php?page=new">Neue Smoje</a></li>
+							<li class="<?= ($page == 'adminStations') ? 'active' : ''; ?>"><a title="Admin Stations" href="index.php?page=adminStations">Stationen</a></li>
+							<li class="<?= ($page == 'adminSensors') ? 'active' : ''; ?>"><a title="Admin Sensors" href="index.php?page=adminSensors">Sensoren</a></li>
 						</ul>
 					</div>
 				</div>

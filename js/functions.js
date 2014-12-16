@@ -2,6 +2,7 @@ $(document).ready(function() {
 	fadeContainer();
 	customSettingsValidation();
 	restartStation();
+	showTooltips();
 });
 
 /* === Fade Toggle container when opening menu === */
@@ -30,4 +31,9 @@ function restartStation() {
 			url: $('input[name=url_netmodule]').val() + 'relay/cycle',
 		});*/
 	});
+}
+
+/* === Show tooltips === */
+function showTooltips() {
+	$('[rel="tooltip"]').tooltip({html: true});
 }
