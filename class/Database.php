@@ -1,5 +1,4 @@
 <?php
-require_once('../config.php');
 
 class Database extends mysqli {
 	private static $instance = null;

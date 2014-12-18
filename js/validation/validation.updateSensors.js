@@ -17,24 +17,29 @@ $('#formUpdateSensors').validate({
 	},
 	errorClass: 'help-block',
 	submitHandler: function(form) {
-		/*$.ajax({
+		$.ajax({
 			type: $(form).attr('method'),
 			url: $(form).attr('action'),
-			data: $(form).find('.tab-pane.active input').serialize(),
+			data: $(form).serialize(),
 			success: function(result) {
 				$('#success').html('<div class="alert alert-success"><strong>Änderungen wurde gespeichert!</strong></div>').delay(3000).fadeOut('fast');
 				$('#formUpdate').fadeOut('fast').delay(3000).fadeIn('fast');
 				$('#formUpdate').find('.has-success').removeClass('has-success');
 			}
 		});
-		return false;*/
+		return false;
 	}
 });
 
-$('#formUpdateSensors').on('submit', function(event) {
-	$('input.title').each(function() {
-		$(this).rules('add', {
-			required: true
-		});
+$('.title, .unit, .displayType').each(function() {
+	$(this).rules('add', {
+		required: true
+	});
+});
+
+$('.sortOrder').each(function() {
+	$(this).rules('add', {
+		required: true,
+		digits: true
 	});
 });

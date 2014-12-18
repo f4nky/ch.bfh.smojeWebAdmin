@@ -1,10 +1,3 @@
-$('#formUpdate').on('submit', function(event) {
-	$('#sensors input').each(function() {
-		$(this).rules('add', {
-			digits: true
-		});
-	});
-});
 $('#formUpdate').validate({
 	rules:{
 		name: 'required',
@@ -12,10 +5,12 @@ $('#formUpdate').validate({
 			required: true,
 			url: true
 		},
-		url_sensoren: {
+		url_sensor: {
+			required: true,
 			url: true
 		},
 		url_tissan: {
+			required: true,
 			url: true
 		}
 	},
@@ -33,6 +28,7 @@ $('#formUpdate').validate({
 			url: $(form).attr('action'),
 			data: $(form).find('.tab-pane.active input').serialize(),
 			success: function(result) {
+				alert(result);
 				$('#success').html('<div class="alert alert-success"><strong>Änderungen wurde gespeichert!</strong></div>').delay(3000).fadeOut('fast');
 				$('#formUpdate').fadeOut('fast').delay(3000).fadeIn('fast');
 				$('#formUpdate').find('.has-success').removeClass('has-success');
@@ -40,4 +36,11 @@ $('#formUpdate').validate({
 		});
 		return false;
 	}
+});
+
+$('.delay').each(function() {
+	$(this).rules('add', {
+		required: true,
+		digits: true
+	});
 });

@@ -1,10 +1,15 @@
 <?php 
 
 require_once('header.inc.php');
+require_once('config.php');
+require_once('class/Database.php');
 
+// get sensors from json
 $json = file_get_contents(URL_SENSORS);
 $jsonObj = json_decode($json);
 $sensors = $jsonObj->sensors;
+
+$displayTypes = getDisplayTypes();
 
 ?>
 
@@ -12,13 +17,13 @@ $sensors = $jsonObj->sensors;
 			<div class="row">
 				<div class="col-xs-12">
 					<h1>Sensoren administrieren</h1>
-					<p>Diese Angaben gelten für sämtliche Stationen.</p>
+					<p>Diese Angaben gelten für alle Sensoren auf sämtlichen Stationen.</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
 					<div id="success"></div>
-					<form id="formUpdateSensors" method="post" action="">
+					<form id="formUpdateSensors" method="post" action="libs/processUpdateSensors.php">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<a href="#sensors" data-toggle="collapse" data-target="#sensors">Sensoren</a>
@@ -55,58 +60,23 @@ $sensors = $jsonObj->sensors;
 													</td>
 													<td>
 														<div class="form-group">
-															<input type="text" class="form-control" name="unit[<?= $sensor->sensorId; ?>]" value="<?= $sensor->unit; ?>">
+															<input type="text" class="form-control unit" name="unit[<?= $sensor->sensorId; ?>]" value="<?= $sensor->unit; ?>">
 														</div>
 													</td>
 													<td>
 														<div class="form-group">
-															<select class="form-control" name="displayType[<?= $sensor->sensorId; ?>]">
-																<option value="1" selected>infoWindow</option>
-																<option value="2">only details</option>
-																<option value="3">none</option>
+															<select class="form-control displayType" name="displayType[<?= $sensor->sensorId; ?>]">
+																<? showOptionFields($displayTypes, $sensor->displayTypeId); ?>
 															</select>
 														</div>
 													</td>
 													<td>
 														<div class="form-group">
-															<input type="text" class="form-control" name="sortOrder[<?= $sensor->sensorId; ?>]" value="<?= $sensor->sortOrder; ?>">
+															<input type="text" class="form-control sortOrder" name="sortOrder[<?= $sensor->sensorId; ?>]" value="<?= $sensor->sortOrder; ?>">
 														</div>
 													</td>
 												</tr>
 												<?php } ?>
-												<!--<tr>
-													<td>4<?//= $sensor->sensorId; ?></td>
-													<td>air_athmosphericpressure<?//= $sensor->name"; ?></td>
-													<td>
-														<div class="form-group">
-															<input type="text" class="form-control title" name="title[<?//= $sensor->sensorId; ?>]" value="Atmosphärendruck<?//= $sensor->title; ?>">
-														</div>
-													</td>
-													<td>
-														<div class="form-group">
-															<input type="text" class="form-control description" name="description[<?//= $sensor->sensorId; ?>]" value="Lorem ipsum<?//= $sensor->description; ?>">
-														</div>
-													</td>
-													<td>
-														<div class="form-group">
-															<input type="text" class="form-control" name="unit[<?//= $sensor->sensorId; ?>]" value="hPa<?//= $sensor->unit; ?>">
-														</div>
-													</td>
-													<td>
-														<div class="form-group">
-															<select class="form-control">
-																<option value="1" selected>infoWindow</option>
-																<option value="2">only details</option>
-																<option value="3">none</option>
-															</select>
-														</div>
-													</td>
-													<td>
-														<div class="form-group">
-															<input type="text" class="form-control" name="sortOrder[<?//= $sensor->sensorId; ?>]" value="40<?//= $sensor->sortOrder; ?>">
-														</div>
-													</td>
-												</tr>-->
 											</tbody>
 										</table>
 									</div>
@@ -120,3 +90,26 @@ $sensors = $jsonObj->sensors;
 		</div>
 
 <?php require_once('footer.inc.php');
+
+// get displayTypes from db
+function getDisplayTypes() {
+	$db = Database::getInstance();
+	$query = 'SELECT * FROM displaytype';
+	$result = $db->query($query);
+	
+	while($row = $result->fetch_object()) {
+		$displayTypes[] = $row;
+	}
+	return $displayTypes;
+}
+
+function showOptionFields($displayTypes, $sensorDisplayTypeId) {
+	if ((!isset($sensorDisplayTypeId)) || (empty($sensorDisplayTypeId))) {
+		echo "<option value='' selected></option>";
+	}
+    
+    foreach($displayTypes as $idx => $displayType) {
+		$status = ((!empty($sensorDisplayTypeId)) && ($displayType->id == $sensorDisplayTypeId)) ? 'selected' : '';
+		echo "<option value='$displayType->id' $status>$displayType->name</option>";
+	}
+}

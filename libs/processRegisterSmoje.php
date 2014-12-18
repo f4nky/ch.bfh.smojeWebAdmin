@@ -1,8 +1,6 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	include_once('../class/Database.php');
-
 	$db = Database::getInstance();
 	$query = 'INSERT INTO station (id, name, description, url_netmodule, url_sensor, url_tissan) '.
 			 'VALUES (?, ?, ?, ?, ?, ?);';

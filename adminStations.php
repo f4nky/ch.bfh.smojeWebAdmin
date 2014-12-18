@@ -2,6 +2,7 @@
 
 require_once('header.inc.php');
 
+// get stations from json
 $json = file_get_contents(URL_STATION_CUR_MEASUREMENTS);
 $jsonObj = json_decode($json);
 $stations = $jsonObj->station;
@@ -32,7 +33,7 @@ function getGPSData($url) {
 			<div class="row">
 				<div class="col-xs-12">
 					<div id="success"></div>
-					<form id="formUpdate" method="post" action="libs/processUpdateSmoje.php">
+					<form id="formUpdate" method="post" action="libs/processUpdateStation.php">
 						<div class="tab-content">
 							<?php foreach($stations as $idx => $station) {
 									$gpsData = getGPSData($station->urlTissan);
@@ -60,7 +61,7 @@ function getGPSData($url) {
 												<div class="col-sm-8">
 													<div class="form-group">
 														<label class="control-label">Beschreibung</label>
-														<input type="text" class="form-control" name="desc" value="<?= $station->description; ?>">
+														<input type="text" class="form-control" name="description" value="<?= $station->description; ?>">
 													</div>
 												</div>
 											</div>
@@ -155,7 +156,7 @@ function getGPSData($url) {
 									<div id="sensors" class="panel-collapse collapse in">
 										<div class="panel-body">
 											<div class="table-responsive">
-												<table class="table">
+												<table class="table table-striped">
 													<thead>
 														<tr>
 															<th class="col-xs-1">#</th>
@@ -173,13 +174,11 @@ function getGPSData($url) {
 															<td><?= $sensor->name; ?></td>
 															<td><?= $sensor->title; ?></td>
 															<td>
-																<div class="form-group">
-																	<input type="checkbox" class="form-control" name="active[<?= $sensor->sensorId; ?>]" value="<?//= $sensor->active; ?>">
-																</div>
+																<input type="checkbox" name="state[<?= $sensor->sensorId; ?>]" value="1" <?//= ($sensor->active == 1) ? 'checked' : ''; ?>>
 															</td>
 															<td>
 																<div class="form-group">
-																	<input type="text" class="form-control" name="delay[<?= $sensor->sensorId; ?>]" value="<?//= $sensor->delay; ?>">
+																	<input type="text" class="form-control delay" name="delay[<?= $sensor->sensorId; ?>]" value="<?//= $sensor->delay; ?>">
 																</div>
 															</td>
 															<td>

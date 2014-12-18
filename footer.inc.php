@@ -4,7 +4,7 @@
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/functions.js"></script>
 		<?= ($page == 'adminStations') ? '<script src="js/validation/validation.updateStation.js"></script>' : ''; ?>
-		<?= ($page == 'adminSensors') ? '<script src="js/validation/validation.updateSensor.js"></script>' : ''; ?>
+		<?= ($page == 'adminSensors') ? '<script src="js/validation/validation.updateSensors.js"></script>' : ''; ?>
 		<?//= ($page == 'new') ? '<script src="js/validation/validation.registerStation.js"></script>' : ''; ?>
 	</body>
 </html>
