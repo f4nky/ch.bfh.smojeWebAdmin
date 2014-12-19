@@ -27,6 +27,7 @@ function getGPSData($url) {
 						<?php foreach($stations as $idx => $station) { ?>
 							<li role="presentation" <?= ($idx == 0) ? 'class="active"' : ''; ?>><a href="#<?= $station->name; ?>" data-toggle="tab"><?= $station->name; ?></a></li>
 						<?php } ?>
+						<li role="presentation"><a href="#">Neue Station</a></li>
 					</ul>
 				</div>
 			</div>
@@ -174,11 +175,11 @@ function getGPSData($url) {
 															<td><?= $sensor->name; ?></td>
 															<td><?= $sensor->title; ?></td>
 															<td>
-																<input type="checkbox" name="state[<?= $sensor->sensorId; ?>]" value="1" <?//= ($sensor->active == 1) ? 'checked' : ''; ?>>
+																<input type="checkbox" name="state[<?= $sensor->sensorId; ?>]" value="1" <?= ($sensor->active == 1) ? 'checked' : ''; ?>>
 															</td>
 															<td>
 																<div class="form-group">
-																	<input type="text" class="form-control delay" name="delay[<?= $sensor->sensorId; ?>]" value="<?//= $sensor->delay; ?>">
+																	<input type="text" class="form-control delay" name="delay[<?= $sensor->sensorId; ?>]" value="<?= $sensor->delay; ?>">
 																</div>
 															</td>
 															<td>
