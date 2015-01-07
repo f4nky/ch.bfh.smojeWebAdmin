@@ -27,7 +27,6 @@ function getGPSData($url) {
 						<?php foreach($stations as $idx => $station) { ?>
 							<li role="presentation" <?= ($idx == 0) ? 'class="active"' : ''; ?>><a href="#<?= $station->name; ?>" data-toggle="tab"><?= $station->name; ?></a></li>
 						<?php } ?>
-						<li role="presentation"><a href="#">Neue Station</a></li>
 					</ul>
 				</div>
 			</div>
@@ -184,7 +183,7 @@ function getGPSData($url) {
 															</td>
 															<td>
 																<?php foreach($sensor->measurements as $idx => $measurement) { ?>
-																	<p>Wert: <?= (($sensor->sensorId == 1) ? ' [Bild]' : $measurement->value .' '. $sensor->unit) .' <span class="small pull-right">'. $measurement->timestamp->date .'</span>'; ?></p>
+																	<p>Wert: <?= (($sensor->sensorId == 1) ? ' [Bild]' : $measurement->value .' '. $sensor->unit) .' <span class=" pull-right">'. date('d.m.y, H:i:s', $measurement->timestamp) .'</span>'; ?></p>
 																<?php } ?>
 															</td>
 														</tr>
