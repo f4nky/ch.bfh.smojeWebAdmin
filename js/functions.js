@@ -3,6 +3,7 @@ $(document).ready(function() {
 	customSettingsValidation();
 	restartStation();
 	showTooltips();
+	$('.fancybox').fancybox();
 });
 
 /* === Fade Toggle container when opening menu === */

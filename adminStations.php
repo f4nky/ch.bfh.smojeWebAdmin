@@ -183,7 +183,15 @@ function getGPSData($url) {
 															</td>
 															<td>
 																<?php foreach($sensor->measurements as $idx => $measurement) { ?>
-																	<p>Wert: <?= (($sensor->sensorId == 1) ? ' [Bild]' : $measurement->value .' '. $sensor->unit) .' <span class=" pull-right">'. date('d.m.y, H:i:s', $measurement->timestamp) .'</span>'; ?></p>
+																	<p>Wert: 
+																	<?php if ($sensor->sensorId == 1) {
+																		$imgPath = str_replace('/var/www', SERVER, $measurement->value); ?>
+																		<a href="<?= $imgPath ?>" class="fancybox" rel="group">[Bild]</a>
+																	<?php } else {
+																		echo "$measurement->value $sensor->unit";
+																	} ?>
+																		<span class="pull-right"><?= date('d.m.y, H:i:s', $measurement->timestamp); ?></span>
+																	</p>
 																<?php } ?>
 															</td>
 														</tr>

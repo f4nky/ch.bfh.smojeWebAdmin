@@ -1,7 +1,8 @@
 <?php
 /*** Paths ***/
-define('URL_STATION_CUR_MEASUREMENTS', 'http://178.62.163.199/smoje/index.php/stations/sensors/measurements');
-define('URL_SENSORS', 'http://178.62.163.199/smoje/index.php/sensors');
+define('SERVER', 'http://178.62.163.199');
+define('URL_STATION_CUR_MEASUREMENTS', SERVER .'/smoje/index.php/stations/sensors/measurements');
+define('URL_SENSORS', SERVER .'/smoje/index.php/sensors');
 
 /*** DB ****/
 define('DB_HOST', '178.62.163.199');
